@@ -22,6 +22,7 @@ git checkout locked-for-gav-xcm-v3-and-bridges
 cargo build --release
 cp target/release/polkadot ~/local_bridge_testing/bin/polkadot
 ```
+
 ### Build cumulus polkadot-parachain binary
 ```sh
 git clone https://github.com/paritytech/cumulus.git
@@ -30,12 +31,21 @@ git checkout bridge-hub-rococo-wococo
 cargo build --release --locked -p polkadot-parachain@0.9.300
 cp target/release/polkadot-parachain ~/local_bridge_testing/bin/polkadot-parachain
 ```
+
 ### Build substrate-relay binary
 ```sh
 git clone https://github.com/paritytech/parity-bridges-common.git
 cd parity-bridges-common
 cargo build --release -p substrate-relay
 cp target/release/substrate-relay ~/local_bridge_testing/bin/substrate-relay
+```
+
+### Build Trappist Parachain binary (for playground)
+```sh
+git clone https://github.com/paritytech/trappist.git
+cd trappist
+cargo build --release
+cp target/release/trappist-collator ~/local_bridge_testing/bin/.
 ```
 
 ### Create a symbolic link to `cumulus` local directory inside `bridge-infra` directory
