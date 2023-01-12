@@ -23,7 +23,16 @@ cargo build --release
 cp target/release/polkadot ~/local_bridge_testing/bin/polkadot
 ```
 
-### Build cumulus polkadot-parachain binary
+### Build Statemine/Statemint binary
+```sh
+git clone https://github.com/paritytech/cumulus.git
+cd cumulus
+git checkout bidzyyys/transact-over-bridges
+cargo build --release --locked -p polkadot-parachain@0.9.300
+cp target/release/polkadot-parachain ~/local_bridge_testing/bin/polkadot-parachain-mint
+```
+
+### Build BridgeHub Binary
 ```sh
 git clone https://github.com/paritytech/cumulus.git
 cd cumulus
@@ -40,15 +49,8 @@ cargo build --release -p substrate-relay
 cp target/release/substrate-relay ~/local_bridge_testing/bin/substrate-relay
 ```
 
-### Build Trappist Parachain binary (for playground)
-```sh
-git clone https://github.com/paritytech/trappist.git
-cd trappist
-cargo build --release
-cp target/release/trappist-collator ~/local_bridge_testing/bin/.
-```
-
 ### Create a symbolic link to `cumulus` local directory inside `bridge-infra` directory
+**NOTE:** cumulus repository must be on `bridge-hub-rococo-wococo` branch.
 ```sh
 ln -s <path_to_cumulus_local_dir> cumulus
 ```

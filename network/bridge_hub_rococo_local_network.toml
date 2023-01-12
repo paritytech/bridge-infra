@@ -65,6 +65,10 @@ cumulus_based = true
     rpc_port = 9911
     ws_port = 9910
     command = "{{POLKADOT_PARACHAIN_BINARY_PATH_FOR_ROCKMINE}}"
+    args = [
+        "-lsync=debug",
+        "--log=xcm=trace"
+    ]
     extra_args = [
         "-lparachain=debug,xcm::weight=trace,xcm::filter_asset_location=trace,xcm::send_xcm=trace,xcm::barriers=trace,xcm::barrier=trace,xcm::execute_xcm=trace,xcm::contains=trace,xcm::execute_xcm_in_credit,xcm::process_instruction=trace,xcm::currency_adapter=trace,xcm::origin_conversion=trace,xcm::fungibles_adapter=trace,xcm::process=trace,xcm::execute=trace,runtime::bridge-assets-transfer=trace",
         "--no-mdns", "--bootnodes {{'rockmine-collator2'|zombie('multiAddress')}}",
@@ -81,36 +85,6 @@ cumulus_based = true
     ]
 
 
-[[parachains]]
-id = 2000
-addToGenesis = true
-cumulus_based = true
-
-	[[parachains.collators]]
-	name = "playground-collator1"
-	validator = true
-	command = "{{PLAYGROUND_PARACHAIN_BINARY_PATH}}"
-	rpc_port = 9835
-	ws_port = 9845
-	extra_args = [
-		"-lparachain=trace,xcm::weight=trace,xcm::filter_asset_location=trace,xcm::send_xcm=trace,xcm::barriers=trace,xcm::barrier=trace,xcm::execute_xcm=trace,xcm::contains=trace,xcm::execute_xcm_in_credit,xcm::process_instruction=trace,xcm::currency_adapter=trace,xcm::origin_conversion=trace,xcm::fungibles_adapter=trace,xcm::process=trace,xcm::execute=trace",
-		"--force-authoring", "--no-mdns", "--bootnodes {{'playground-collator2'|zombie('multiAddress')}}",
-		"-- --port 51335 --rpc-port 58835 --ws-port 58845 --no-mdns", "--bootnodes {{'alice-validator'|zombie('multiAddress')}}"
-	]
-
-	[[parachains.collators]]
-	name = "playground-collator2"
-	validator = true
-	command = "{{PLAYGROUND_PARACHAIN_BINARY_PATH}}"
-	rpc_port = 9836
-	ws_port = 9846
-	extra_args = [
-		"-lparachain=trace,xcm::weight=trace,xcm::filter_asset_location=trace,xcm::send_xcm=trace,xcm::barriers=trace,xcm::barrier=trace,xcm::execute_xcm=trace,xcm::contains=trace,xcm::execute_xcm_in_credit,xcm::process_instruction=trace,xcm::currency_adapter=trace,xcm::origin_conversion=trace,xcm::fungibles_adapter=trace,xcm::process=trace,xcm::execute=trace",
-		"--force-authoring", "--no-mdns", "--bootnodes {{'playground-collator1'|zombie('multiAddress')}}",
-		"-- --port 51336 --rpc-port 58836 --ws-port 58846 --no-mdns", "--bootnodes {{'bob-validator'|zombie('multiAddress')}}"
-	]
-
-
 # Rockmine <> BridgeHub
 [[hrmp_channels]]
 sender = 1000
@@ -124,28 +98,3 @@ recipient = 1000
 max_capacity = 4
 max_message_size = 524288
 
-# Playground <> Rockmine
-[[hrmp_channels]]
-sender = 1000
-recipient = 2000
-max_capacity = 4
-max_message_size = 524288
-
-[[hrmp_channels]]
-sender = 2000
-recipient = 1000
-max_capacity = 4
-max_message_size = 524288
-
-# Playground <> BridgeHub
-[[hrmp_channels]]
-sender = 2000
-recipient = 1013
-max_capacity = 4
-max_message_size = 524288
-
-[[hrmp_channels]]
-sender = 1013
-recipient = 2000
-max_capacity = 4
-max_message_size = 524288

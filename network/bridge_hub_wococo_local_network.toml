@@ -67,7 +67,10 @@ cumulus_based = true
 	rpc_port = 9011
 	ws_port = 9010
 	command = "{{POLKADOT_PARACHAIN_BINARY_PATH_FOR_WOCKMINT}}"
-	extra_args = [
+	args = [
+        "--log=xcm=trace"
+    ]
+    extra_args = [
 		"-lparachain=debug,xcm::weight=trace,xcm::filter_asset_location=trace,xcm::send_xcm=trace,xcm::barriers=trace,xcm::barrier=trace,xcm::execute_xcm=trace,xcm::contains=trace,xcm::execute_xcm_in_credit,xcm::process_instruction=trace,xcm::currency_adapter=trace,xcm::origin_conversion=trace,xcm::fungibles_adapter=trace,xcm::process=trace,xcm::execute=trace",
 		"--no-mdns", "--bootnodes {{'wockmint-collator2'|zombie('multiAddress')}}",
 		"-- --port 31333 --rpc-port 38933 --ws-port 38943 --no-mdns", "--bootnodes {{'alice-validator-wo'|zombie('multiAddress')}}"
@@ -76,43 +79,14 @@ cumulus_based = true
 	[[parachains.collators]]
 	name = "wockmint-collator2"
 	command = "{{POLKADOT_PARACHAIN_BINARY_PATH_FOR_WOCKMINT}}"
-	extra_args = [
+	args = [
+        "--log=xcm=trace"
+    ]
+    extra_args = [
 		"-lparachain=debug,xcm::weight=trace,xcm::filter_asset_location=trace,xcm::send_xcm=trace,xcm::barriers=trace,xcm::barrier=trace,xcm::execute_xcm=trace,xcm::contains=trace,xcm::execute_xcm_in_credit,xcm::process_instruction=trace,xcm::currency_adapter=trace,xcm::origin_conversion=trace,xcm::fungibles_adapter=trace,xcm::process=trace,xcm::execute=trace",
 		"--no-mdns", "--bootnodes {{'wockmint-collator1'|zombie('multiAddress')}}",
 		"-- --port 31433 --rpc-port 38833 --ws-port 38843 --no-mdns", "--bootnodes {{'alice-validator-wo'|zombie('multiAddress')}}"
 	]
-
-# Playground Parachain
-[[parachains]]
-id = 2000
-addToGenesis = true
-cumulus_based = true
-
-	[[parachains.collators]]
-	name = "playground-collator1-wo"
-	validator = true
-	command = "{{PLAYGROUND_PARACHAIN_BINARY_PATH}}"
-	rpc_port = 8833
-	ws_port = 8843
-	extra_args = [
-		"-lparachain=trace,xcm::weight=trace,xcm::filter_asset_location=trace,xcm::send_xcm=trace,xcm::barriers=trace,xcm::barrier=trace,xcm::execute_xcm=trace,xcm::contains=trace,xcm::execute_xcm_in_credit,xcm::process_instruction=trace,xcm::currency_adapter=trace,xcm::origin_conversion=trace,xcm::fungibles_adapter=trace,xcm::process=trace,xcm::execute=trace",
-		"--force-authoring", "--no-mdns", "--bootnodes {{'playground-collator2-wo'|zombie('multiAddress')}}",
-		"-- --port 21333 --rpc-port 48833 --ws-port 48843 --no-mdns", "--bootnodes {{'alice-validator'|zombie('multiAddress')}}"
-	]
-
-	[[parachains.collators]]
-	name = "playground-collator2-wo"
-	validator = true
-	command = "{{PLAYGROUND_PARACHAIN_BINARY_PATH}}"
-	rpc_port = 8834
-	ws_port = 8844
-	extra_args = [
-		"-lparachain=trace,xcm::weight=trace,xcm::filter_asset_location=trace,xcm::send_xcm=trace,xcm::barriers=trace,xcm::barrier=trace,xcm::execute_xcm=trace,xcm::contains=trace,xcm::execute_xcm_in_credit,xcm::process_instruction=trace,xcm::currency_adapter=trace,xcm::origin_conversion=trace,xcm::fungibles_adapter=trace,xcm::process=trace,xcm::execute=trace",
-		"--force-authoring", "--no-mdns", "--bootnodes {{'playground-collator1-wo'|zombie('multiAddress')}}",
-		"-- --port 21334 --rpc-port 48834 --ws-port 48844 --no-mdns", "--bootnodes {{'bob-validator'|zombie('multiAddress')}}"
-	]
-
-
 
 # Wockmint <> BridgeHub
 [[hrmp_channels]]
@@ -127,28 +101,3 @@ recipient = 1000
 max_capacity = 4
 max_message_size = 524288
 
-# Playground <> Wockmint
-[[hrmp_channels]]
-sender = 1000
-recipient = 2000
-max_capacity = 4
-max_message_size = 524288
-
-[[hrmp_channels]]
-sender = 2000
-recipient = 1000
-max_capacity = 4
-max_message_size = 524288
-
-# Playground <> BridgeHub
-[[hrmp_channels]]
-sender = 2000
-recipient = 1014
-max_capacity = 4
-max_message_size = 524288
-
-[[hrmp_channels]]
-sender = 1014
-recipient = 2000
-max_capacity = 4
-max_message_size = 524288
