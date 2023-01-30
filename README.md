@@ -18,7 +18,7 @@ and rename it to `zombienet`.
 ```sh
 git clone https://github.com/paritytech/polkadot.git
 cd polkadot
-git checkout locked-for-gav-xcm-v3-and-bridges
+git checkout 5d8164fdda
 cargo build --release
 cp target/release/polkadot ~/local_bridge_testing/bin/polkadot
 ```
@@ -27,8 +27,8 @@ cp target/release/polkadot ~/local_bridge_testing/bin/polkadot
 ```sh
 git clone https://github.com/paritytech/cumulus.git
 cd cumulus
-git checkout bidzyyys/transact-over-bridges
-cargo build --release --locked -p polkadot-parachain@0.9.300
+git checkout bridges-task-force/transact-experiments
+cargo build --release --locked -p polkadot-parachain-bin
 cp target/release/polkadot-parachain ~/local_bridge_testing/bin/polkadot-parachain-mint
 ```
 
@@ -36,8 +36,8 @@ cp target/release/polkadot-parachain ~/local_bridge_testing/bin/polkadot-paracha
 ```sh
 git clone https://github.com/paritytech/cumulus.git
 cd cumulus
-git checkout bridge-hub-rococo-wococo
-cargo build --release --locked -p polkadot-parachain@0.9.300
+git checkout bridges-task-force/ethereum-playground
+cargo build --release --locked -p polkadot-parachain-bin
 cp target/release/polkadot-parachain ~/local_bridge_testing/bin/polkadot-parachain
 ```
 
@@ -45,6 +45,7 @@ cp target/release/polkadot-parachain ~/local_bridge_testing/bin/polkadot-paracha
 ```sh
 git clone https://github.com/paritytech/parity-bridges-common.git
 cd parity-bridges-common
+git checkout 036e6696
 cargo build --release -p substrate-relay
 cp target/release/substrate-relay ~/local_bridge_testing/bin/substrate-relay
 ```
