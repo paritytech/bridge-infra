@@ -51,7 +51,7 @@ cp target/release/substrate-relay ~/local_bridge_testing/bin/substrate-relay
 ```
 
 ### Create a symbolic link to `cumulus` local directory inside `bridge-infra` directory
-**NOTE:** cumulus repository must be on `bridge-hub-rococo-wococo` branch.
+**NOTE:** cumulus repository must be on `bridges-task-force/ethereum-playground` branch.
 ```sh
 ln -s <path_to_cumulus_local_dir> cumulus
 ```
@@ -74,4 +74,15 @@ In a separated terminal run relayer for Kusama <> Polkadot:
 
 Check if everything works as expected following the [instruction](https://github.com/paritytech/cumulus/blob/bridge-hub-rococo-wococo/parachains/runtimes/bridge-hubs/README.md#run-relayers-rococo-wococo).
 
+### Play with it
+
+#### Rococo side
+- [Rococo](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9942#/explorer)
+- [Statemine](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9910#/explorer)
+- [Rococo BridgeHub](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A8943#/explorer)
+
+#### Wococo side
+- [Wococo](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9945#/explorer)
+- [Westmint](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9010#/explorer)
+- [Wococo BridgeHub](https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:8945#/explorer)
 
