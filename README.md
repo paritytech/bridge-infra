@@ -72,6 +72,40 @@ In a separated terminal run relayer for Kusama <> Polkadot:
 ./scripts/relay.sh
 ```
 
+### Ethereum setup
+
+#### Create a symbolic link to `ethereum_xcm_builder` local directory inside `bridge-infra` directory
+```sh
+ln -s <path_to_ethereum_xcm_builder> ethereum_xcm_builder
+```
+
+#### Python
+Follow the [instruction](https://mnzel.medium.com/how-to-activate-python-venv-on-a-mac-a8fa1c3cb511) to install Python, venv & activate venv.
+
+#### Install requirements
+Remember to load venv for the project:
+```sh
+source venv/bin/activate
+```
+
+Install Python dependencies for the Ethereum -> Polkadot relayer:
+```sh
+pip3 install --upgrade pip
+pip3 install -r requirements.txt
+```
+
+#### Run Ethereum -> Polkadot relayer
+Remember to load venv for the project:
+```sh
+source venv/bin/activate
+```
+
+Run Python script for relayer:
+```sh
+python3 main.py
+```
+
+
 Check if everything works as expected following the [instruction](https://github.com/paritytech/cumulus/blob/bridge-hub-rococo-wococo/parachains/runtimes/bridge-hubs/README.md#run-relayers-rococo-wococo).
 
 ### Play with it
